@@ -33,3 +33,31 @@ console.log('总里程:', totalKm(valid), '公里');
 console.log('最长一次:', longest(valid));
 console.log('平均配速:', avgPace(valid), '分钟/公里');
 console.log('达标记录(单次≥5km):', reached(valid));
+
+// 格式化汇总报告（空数据保护：没有有效记录时返回提示而不是崩溃）
+const report = (list) => {
+  const valid = cleanWorkouts(list);
+  if (valid.length === 0) {
+    return '这周还没有有效运动记录';
+  }
+  return `本周共${valid.length}次有效运动，总里程${totalKm(valid)}公里，最长一次${longest(valid).km}公里（${longest(valid).date}），平均配速${avgPace(valid)}分钟/公里；达标(≥5km)日期：${reached(valid).join('、') || '无'}`;
+};
+
+try {
+  console.log('本周报告:', report(workouts));
+} catch (err) {
+  console.error('报告生成失败: ', err.message);
+}
+
+// 交互输入：记录今天的一次运动（非法输入只提示，程序不崩溃）
+const input = prompt('今天运动了多少公里？（输入数字，点取消则跳过）');
+if (input !== null) {
+  const km = Number(input);
+  if (Number.isNaN(km) || km <= 0) {
+    console.warn(`输入"${input}"无效，已忽略本次输入`);  // 非法输入处理
+  } else {
+    workouts.push({ date: '今天', type: '跑步', km: km, minutes: Math.round(km * 6) });
+    console.log('已记录今天的运动:', workouts[workouts.length - 1]);
+    console.log('更新后的报告:', report(workouts));
+  }
+}
