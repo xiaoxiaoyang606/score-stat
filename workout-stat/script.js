@@ -11,3 +11,25 @@ const workouts = [
 ];
 
 console.log('原始记录数:', workouts.length);
+
+// 清洗：只保留距离和时长都大于 0 的合法记录
+const cleanWorkouts = (list) => list.filter(w => w.km > 0 && w.minutes > 0);
+
+// 总里程：把所有记录的公里数累加
+const totalKm = (list) => list.reduce((sum, w) => sum + w.km, 0);
+
+// 最长的一次运动：两两比较，留下距离最大的那条
+const longest = (list) => list.reduce((max, w) => w.km > max.km ? w : max, list[0]);
+
+// 平均配速：总时长 ÷ 总里程，保留 1 位小数（分钟/公里）
+const avgPace = (list) => (list.reduce((sum, w) => sum + w.minutes, 0) / totalKm(list)).toFixed(1);
+
+// 达标记录：单次 ≥ 5 公里的日期名单（filter 筛选 + map 提取日期）
+const reached = (list) => list.filter(w => w.km >= 5).map(w => w.date);
+
+const valid = cleanWorkouts(workouts);
+console.log('清洗后记录数:', valid.length);
+console.log('总里程:', totalKm(valid), '公里');
+console.log('最长一次:', longest(valid));
+console.log('平均配速:', avgPace(valid), '分钟/公里');
+console.log('达标记录(单次≥5km):', reached(valid));
