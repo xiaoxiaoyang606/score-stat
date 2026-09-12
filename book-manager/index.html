@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图书收藏</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: sans-serif; max-width: 600px; margin: 24px auto; padding: 0 16px; }
+    .tip { color: #c00; font-size: 14px; min-height: 20px; }
+    li { margin: 8px 0; padding: 8px; border: 1px solid #ddd; }
+    .del { margin-left: 12px; cursor: pointer; color: #c00; }
+    .search-box { margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>图书收藏</h1>
+
+  <!-- 添加表单：3个字段 -->
+  <form id="add-form">
+    <input type="text" id="title-input" placeholder="书名">
+    <input type="text" id="author-input" placeholder="作者">
+    <input type="number" id="rating-input" placeholder="评分(1-10)" min="1" max="10">
+    <button type="submit">添加</button>
+  </form>
+
+  <p class="tip" id="tip"></p>
+
+  <!-- 搜索框（查询功能） -->
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="按书名搜索...">
+  </div>
+
+  <ul id="book-list"></ul>
+
+  <script src="app.js"></script>
+</body>
+</html>
