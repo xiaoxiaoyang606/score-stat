@@ -64,5 +64,9 @@ filters . addEventListener( 'click' , (e) => {
     currentFilter = e . target . dataset . filter;
     render( );
  });
+let  tasks = JSON . parse(localStorage . getItem( 'task' ) | | '[ ]' ) ;
+const  save = ( ) => localStorage . setItem( 'task' , JSON . stringify( task )) ;
+
+
 
     
