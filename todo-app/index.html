@@ -13,7 +13,7 @@ padding:  0  16px;  }
         .tip  {  color:  #c00;  font-size:  14px;  min-height:  20px;  }
         .filters  {  margin:  12px  0;  }
         .filters  button  {  margin-right:  8px;  }
-    <style>
+    </style>
 </header>
 <body>
     <h1>任务清单</h1>
@@ -22,8 +22,13 @@ padding:  0  16px;  }
         <button  type="submit">添加</button>
     </form>
     <p  class="tip"  id="tip"></P>
+    <div  class="filters">
+        <button data-filter="all">全部</button>
+        <button data-filter="active">未完成</button>
+        <button data-filter="done">已完成</button>
+    </div>
     <u1  id="task-list"></u1>
     <script  src="app.js"></script>
 </body>
-<html>
+</html>
  
