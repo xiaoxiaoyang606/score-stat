@@ -10,6 +10,11 @@ const searchInput = document.querySelector('#search-input');
 // ② 数据数组
 let books = [];
 
+// 保存函数（每次改动数据后调用）
+const save = () => {
+  localStorage.setItem('books', JSON.stringify(books));
+};
+
 // ③ render 统一渲染（和 todo-app 一样的套路）
 const render = () => {
   list.innerHTML = '';
@@ -74,3 +79,7 @@ form.addEventListener('submit', (e) => {
 
 // ⑤ 搜索框实时过滤
 searchInput.addEventListener('input', render);
+// 从 localStorage 读取已有数据（页面打开时）
+const saved = localStorage.getItem('books');
+if (saved) books = JSON.parse(saved);
+render();  // 页面打开时先画一次
